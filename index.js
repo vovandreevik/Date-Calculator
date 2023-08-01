@@ -1,5 +1,4 @@
 // date 2 is today;
-alert("change sth");
 const date = new Date();
 document.getElementById("day2").value = date.getDate();
 document.getElementById("month2").selectedIndex = date.getMonth();
@@ -8,7 +7,7 @@ document.getElementById("year2").value = date.getFullYear();
 function dateCalculator() {
     document.getElementById("result").innerHTML = "";
     document.getElementById("errors").innerHTML = "";
-parseInt
+    parseInt
     // first date
     const day1 = parseInt(document.getElementById("day1").value);
     const month1 = document.getElementById("month1").selectedIndex;
@@ -24,14 +23,16 @@ parseInt
     let check = checkingTheValidityOfDates(day1, day2, month1, month2, year1, year2, era1, era2);
 
     if (check) {
-        const date1 = [day1, month1, year1, era1];
-        const date2 = [day2, month2, year2, era2];
+        const tempDateArray = choosingSmallerAndLargerDates([day1, month1, year1, era1], [day2, month2, year2, era2]);
 
-        check = checkingFirstDateIsLessThanTheSecond(date1, date2);
+        console.log(tempDateArray);
+
+        const date1 = tempDateArray[0];
+        const date2 = tempDateArray[1];
 
         if (check) {
-            // const calculatingTheDateDifference = calculatingTheDateDifference(date1, date2);;
-            const calculatingTheDateDifferenceInDays = calculatingTheDate(date1, date2);
+            // const calculatingTheDateDifference = calculatingTheDateDifference(date1, date2);
+            const calculatingTheDateDifferenceInDays = calculatingTheDate(date1, date2) + " days";
             document.getElementById("result").innerHTML = calculatingTheDateDifferenceInDays;
         }
     }
@@ -113,60 +114,56 @@ function checkingTheValidityOfDates(day1, day2, month1, month2, year1, year2, er
         result = false;
     }
 
+    if (era1 == era2 && year1 == year2 && month1 == month2 && day1 == day2) {
+        // tempDate1 == tempDate2
+        errorStr += "Two identical dates have been entered!";
+        result = false;
+    }
     document.getElementById("errors").innerHTML = errorStr;
     return result;
 }
 
-function checkingFirstDateIsLessThanTheSecond(date1, date2) {
+function choosingSmallerAndLargerDates(tempDate1, tempDate2) {
     // date = [day, month, year, era];
-    if (date1[3] == date2[3] && date1[2] == date2[2] && date1[1] == date2[1] && date1[0] == date2[0]) {
-        // date1 == date2
-        document.getElementById("errors").innerHTML = "Two identical dates have been entered!";
-        return false;
 
-    } else if (date1[3] > date2[3]) {
+    if (tempDate1[3] > tempDate2[3]) {
         // AD and BC
-        document.getElementById("errors").innerHTML = "The first date is less than the second!";
-        return false;
+        return [tempDate2, tempDate1];
 
-    } else if ((date1[3] == date2[3]) && (date1[3] == 0)) {
+    } else if ((tempDate1[3] == tempDate2[3]) && (tempDate1[3] == 0)) {
         // BC
-        if (date1[2] > date2[2]) {
-            return true;
-        } else if (date1[2] == date2[2]) {
-            if (date1[1] < date2[1]) {
-                return true;
-            } else if ((date1[1] == date2[1]) && (date1[0] < date2[0])) {
-                return true;
+        if (tempDate1[2] > tempDate2[2]) {
+            return [tempDate2, tempDate1];
+        } else if (tempDate1[2] == tempDate2[2]) {
+            if (tempDate1[1] < tempDate2[1]) {
+                return [tempDate1, tempDate2];
+            } else if ((tempDate1[1] == tempDate2[1]) && (tempDate1[0] < tempDate2[0])) {
+                return [tempDate1, tempDate2];
             } else {
-                document.getElementById("errors").innerHTML = "The first date is less than the second!";
-                return false;
+                return [tempDate2, tempDate1];
             }
         } else {
-            document.getElementById("errors").innerHTML = "The first date is less than the second!";
-            return false;
+            return [tempDate2, tempDate1];
         }
 
-    } else if ((date1[3] == date2[3]) && (date1[3] == 1)) {
+    } else if ((tempDate1[3] == tempDate2[3]) && (tempDate1[3] == 1)) {
         // AD
-        if (date1[2] < date2[2]) {
-            return true;
-        } else if (date1[2] == date2[2]) {
-            if (date1[1] < date2[1]) {
-                return true;
-            } else if ((date1[1] == date2[1]) && (date1[0] < date2[0])) {
-                return true;
+        if (tempDate1[2] < tempDate2[2]) {
+            return [tempDate1, tempDate2];
+        } else if (tempDate1[2] == tempDate2[2]) {
+            if (tempDate1[1] < tempDate2[1]) {
+                return [tempDate1, tempDate2];
+            } else if ((tempDate1[1] == tempDate2[1]) && (tempDate1[0] < tempDate2[0])) {
+                return [tempDate1, tempDate2];
             } else {
-                document.getElementById("errors").innerHTML = "The first date is less than the second!";
-                return false;
+                return [tempDate2, tempDate1];
             }
         } else {
-            document.getElementById("errors").innerHTML = "The first date is less than the second!";
-            return false;
+            return [tempDate2, tempDate1];
         }
 
     } else {
-        return true;
+        return [tempDate1, tempDate2];
     }
 }
 
@@ -178,18 +175,18 @@ function calculatingTheDate(date1, date2) {
     let result;
     if ((date1[3] == date2[3]) && date1[3] == 1) {
         //AD
-        result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2[1])
-            - numberOfDaysSinceTheBeginningOfTheYear(date1[1]) + (date2[2] - date1[2]) * 365;
+        result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
+            - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] - date1[2]) * 365;
     } else if ((date1[3] == date2[3]) && date1[3] == 0) {
         //BC
-        result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2[1])
-            - numberOfDaysSinceTheBeginningOfTheYear(date1[1]) + (date1[2] - date2[2]) * 365;
+        result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
+            - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date1[2] - date2[2]) * 365;
     } else {
         // BC and AD
-        result = date2[0] + date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2[1])
-            + numberOfDaysSinceTheBeginningOfTheYear(date1[1]) + (date2[2] + date1[2]) * 365;
+        result = date2[0] + date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
+            + numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] + date1[2]) * 365;
     }
-    result += numberOfDaysInLeapYears(date1, date2) - (date1[1] >= 1) - (date2[1] < 1);
+    result += numberOfDaysInLeapYears(date1, date2);
     return result;
 }
 
@@ -216,23 +213,23 @@ function numberOfDaysInLeapYears(date1, date2) {
     let year1 = date1[2], year2 = date2[2];
     if ((date1[3] == date2[3]) && (date1[3] == 0)) {
         //BC
-        while(((year1 - 1) % 400) != 0){
+        while (((year1 - 1) % 400) != 0) {
             if (leapYearCheck(year1, date1[3])) {
                 result++;
             }
             year1--;
-            console.log(year1,year2, result);
+            //console.log(year1, year2, result);
         };
-        if ((year1 - year2) >= 400){
+        if ((year1 - year2) >= 400) {
             result += (Math.floor((year1 - year2) / 400) * 100);
             year1 -= (Math.floor((year1 - year2) / 400)) * 400;
-            console.log(year1,year2, result);
+            //console.log(year1, year2, result);
         }
         for (year2; year2 <= year1; ++year2) {
             if (leapYearCheck(year2, date2[3])) {
                 result++;
             }
-            console.log(year1,year2, result);
+            //console.log(year1, year2, result);
         }
     }
     return result;
