@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazing Date Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="DateCalculator">
+        <div class="FirstDate">
+            <h1>Enter first date</h1>
+            <div class = "Day">
+                <label for="day" class="Text">Day</label>
+                <input name="day" type="number" id="day1" max="31" min="1" value="1">
+            </div>
+            <div class="Month">
+                <label for="month" class="Text">Month</label>
+                <select name="month" id="month1"> 
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+            </div>
+            <div class="Year">
+                <label for="year" class="Text">Year</label>
+                <input type="number" name="year" id="year1" value="45" min ="1">
+                <input type="radio" name="era1" id="BC1" checked>
+                <label for="era1" class="Text">BC</label>
+                <input type="radio" name="era1" id="AD1">
+                <label for="era1" class="Text">AD</label>
+            </div>
+        </div>
+
+        <div class="SecondDate">
+            <h1>Enter second date</h1>
+            <div class = "Day">
+                <label for="day" class="Text">Day</label>
+                <input name="day" type="number" id="day2" max="31" min="1">
+            </div>
+            <div class="Month">
+                <label for="month" class="Text">Month</label>
+                <select name="month" id="month2"> 
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+            </div>
+            <div class="Year">
+                <label for="year" class="Text">Year</label>
+                <input type="number" name="year" id="year2" min ="1">
+                <input type="radio" name="era2" id="BC2">
+                <label for="era2" class="Text">BC</label>
+                <input type="radio" name="era2" id="AD2" checked>
+                <label for="era2" class="Text">AD</label>
+            </div>
+        </div>
+
+        <div class="Button">
+            <button id="button" onclick="dateCalculator()">Calculate</button>
+            <p id="result"></p>
+        </div>
+
+        <div class="Errors">
+
+            <p id="errors"></p>
+        </div>
+    </div>
+
+    <script src = "index.js"></script>
+</body>
+
+
+
+</html>
+
+
+
