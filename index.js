@@ -204,7 +204,7 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
             console.log(date1[2], date2[2], result);
         }
         if ((date1[2] > date2[2]) || ((date1[2] > date2[2]) && (date2[1] > 1))){
-            for (date2[2]; date2[2] <= date1[2]; --date1[2]) {
+            for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
                 if (leapYearCheck(date2[2], date2[3])) {
                     result++;
                 }
