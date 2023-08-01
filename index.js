@@ -1,5 +1,5 @@
 // date 2 is today;
-alert("GIT HUB");
+alert("change sth");
 const date = new Date();
 document.getElementById("day2").value = date.getDate();
 document.getElementById("month2").selectedIndex = date.getMonth();
