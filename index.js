@@ -113,6 +113,7 @@ function datesInChronologicalOrder(date1, date2) {
 
     if (date1[3] > date2[3]) {
         // AD and BC
+        date2[2]--;
         return [date2, date1];
 
     } else if ((date1[3] == date2[3]) && (date1[3] == 0)) {
@@ -148,6 +149,7 @@ function datesInChronologicalOrder(date1, date2) {
         }
 
     } else {
+        date1[2]--;
         return [date1, date2];
     }
 }
@@ -155,7 +157,8 @@ function datesInChronologicalOrder(date1, date2) {
 function calculatingTheDatesDifferenceInDays(dateArray) {
     // date = [day, month, year, era];
     const date1 = dateArray[0], date2 = dateArray[1];
-    let result;
+    let result = 0;
+    console.log(date1[2], date2[2], result);
 
     if ((date1[3] == date2[3]) && date1[3] == 1) {
         //AD
@@ -168,10 +171,15 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
     } else {
         // BC and AD
         result = date2[0] + date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
-            + numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] + date1[2]) * 365;
+            + (365 - numberOfDaysSinceTheBeginningOfTheYear(date1)) + (date2[2] + date1[2] - 1) * 365;
     }
-    
-    return result += calculateNumberOfDaysInLeapYears(date1, date2);
+
+    result += calculateNumberOfDaysInLeapYears(date1, date2);
+    console.log(date1[2], date2[2], result);
+    if (result == 1){
+        return "1 day";
+    }
+    return result + " days";
 }
 
 function numberOfDaysSinceTheBeginningOfTheYear(date) {
@@ -195,7 +203,6 @@ function numberOfDaysSinceTheBeginningOfTheYear(date) {
 function calculateNumberOfDaysInLeapYears(date1, date2) {
     // date = [day, month, year, era];
     let result = 0;
-    console.log(date1[2], date2[2], result);
     if ((date1[3] == date2[3]) && (date1[3] == 0)) {
         //BC
         if ((date1[2] - date2[2]) >= 400) {
@@ -203,7 +210,7 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
             date1[2] -= (Math.floor((date1[2] - date2[2]) / 400)) * 400;
             console.log(date1[2], date2[2], result);
         }
-        if ((date1[2] > date2[2]) || ((date1[2] > date2[2]) && (date2[1] > 1))){
+        if ((date1[2] > date2[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
             for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
                 if (leapYearCheck(date2[2], date2[3])) {
                     result++;
@@ -215,33 +222,35 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
 
     if ((date1[3] == date2[3]) && (date1[3] == 1)) {
         //AD
-
         if ((date2[2] - date1[2]) >= 400) {
-            result += (Math.floor((date1[2] - date2[2]) / 400) * 100);
-            date1[2] -= (Math.floor((date1[2] - date2[2]) / 400)) * 400;
+            result += (Math.floor((date2[2] - date1[2]) / 400) * 100);
+            date2[2] -= (Math.floor((date2[2] - date1[2]) / 400)) * 400;
             console.log(date1[2], date2[2], result);
         }
-        
-        for (date2[2]; date2[2] < date1[2]; ++date2[2]) {
-            if (leapYearCheck(date2[2], date2[3])) {
-                result++;
+        if ((date2[2] > date1[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
+            for (date1[2]; date1[2] <= date2[2]; ++date1[2]) {
+                if (leapYearCheck(date1[2], date1[3])) {
+                    result++;
+                }
+                console.log(date1[2], date2[2], result);
             }
-            console.log(date1[2], date2[2], result);
         }
     }
 
     if ((date1[3] != date2[3])) {
         //BC and AD
-        if ((date1[2] - date2[2]) >= 400) {
+        if (((date1[2] + date2[2])) >= 400) {
             result += (Math.floor((date1[2] - date2[2]) / 400) * 100);
             date1[2] -= (Math.floor((date1[2] - date2[2]) / 400)) * 400;
             console.log(date1[2], date2[2], result);
         }
-        for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
-            if (leapYearCheck(date2[2], date2[3])) {
-                result++;
+        if ((date1[2] > date2[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
+            for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
+                if (leapYearCheck(date2[2], date2[3])) {
+                    result++;
+                }
+                console.log(date1[2], date2[2], result);
             }
-            console.log(date1[2], date2[2], result);
         }
     }
 
