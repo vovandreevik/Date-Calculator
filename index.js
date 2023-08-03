@@ -3,6 +3,8 @@ document.getElementById("day2").value = tempDate.getDate();
 document.getElementById("month2").selectedIndex = tempDate.getMonth();
 document.getElementById("year2").value = tempDate.getFullYear();
 
+const FIRST_GRIGORIAN_YEAR = 1582;
+
 function dateCalculator() {
     document.getElementById("result").innerHTML = "";
     document.getElementById("errors").innerHTML = "";
@@ -37,13 +39,13 @@ function leapYearCheck(year, era) {
         return true;
     }
     // Julian calendar
-    if ((era == 1) && (year < 1582)) {
+    if ((era == 1) && (year < FIRST_GRIGORIAN_YEAR)) {
         if ((year % 4 == 0)) {
             return true;
         }
     }
     // Gregorian calendar
-    if ((era == 1) && (year > 1582)) {
+    if ((era == 1) && (year > FIRST_GRIGORIAN_YEAR)) {
         if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
             return true;
         }
@@ -158,12 +160,18 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
     // date = [day, month, year, era];
     const date1 = dateArray[0], date2 = dateArray[1];
     let result = 0;
-    console.log(date1[2], date2[2], result);
+    console.log(date1[2], date2[2], result,
+        numberOfDaysSinceTheBeginningOfTheYear(date2), numberOfDaysSinceTheBeginningOfTheYear(date1));
 
     if ((date1[3] == date2[3]) && date1[3] == 1) {
         //AD
-        result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
-            - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] - date1[2]) * 365;
+        if ((date1[2] < FIRST_GRIGORIAN_YEAR) && (date2[2] > FIRST_GRIGORIAN_YEAR)) { /// ??? > / >=
+
+        } else {
+            result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
+                - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] - date1[2]) * 365;
+        }
+
     } else if ((date1[3] == date2[3]) && date1[3] == 0) {
         //BC
         result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
@@ -173,10 +181,10 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
         result = date2[0] + date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
             + (365 - numberOfDaysSinceTheBeginningOfTheYear(date1)) + (date2[2] + date1[2] - 1) * 365;
     }
-
+    console.log(date1[2], date2[2], result);
     result += calculateNumberOfDaysInLeapYears(date1, date2);
     console.log(date1[2], date2[2], result);
-    if (result == 1){
+    if (result == 1) {
         return "1 day";
     }
     return result + " days";
@@ -208,9 +216,9 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
         if ((date1[2] - date2[2]) >= 400) {
             result += (Math.floor((date1[2] - date2[2]) / 400) * 100);
             date1[2] -= (Math.floor((date1[2] - date2[2]) / 400)) * 400;
-            console.log(date1[2], date2[2], result);
         }
-        if ((date1[2] > date2[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
+        console.log(date1[2], date2[2], result);
+        if (date1[2] > date2[2]) {
             for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
                 if (leapYearCheck(date2[2], date2[3])) {
                     result++;
@@ -222,37 +230,50 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
 
     if ((date1[3] == date2[3]) && (date1[3] == 1)) {
         //AD
-        if ((date2[2] - date1[2]) >= 400) {
-            result += (Math.floor((date2[2] - date1[2]) / 400) * 100);
-            date2[2] -= (Math.floor((date2[2] - date1[2]) / 400)) * 400;
-            console.log(date1[2], date2[2], result);
-        }
-        if ((date2[2] > date1[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
-            for (date1[2]; date1[2] <= date2[2]; ++date1[2]) {
-                if (leapYearCheck(date1[2], date1[3])) {
-                    result++;
-                }
+        if (date2[2] <= FIRST_GRIGORIAN_YEAR) {
+            if ((date2[2] - date1[2]) >= 400) {
+                result += (Math.floor((date2[2] - date1[2]) / 400) * 100);
+                date2[2] -= (Math.floor((date2[2] - date1[2]) / 400)) * 400;
                 console.log(date1[2], date2[2], result);
             }
+            if (date2[2] > date1[2]) {
+                for (date1[2]; date1[2] <= date2[2]; ++date1[2]) {
+                    if (leapYearCheck(date1[2], date1[3])) {
+                        result++;
+                    }
+                    console.log(date1[2], date2[2], result);
+                }
+            }
+        }
+        if (date1[2] >= FIRST_GRIGORIAN_YEAR) {
+            if ((date2[2] - date1[2]) >= 400) {
+                result += (Math.floor((date2[2] - date1[2]) / 400) * 97);
+                date2[2] -= (Math.floor((date2[2] - date1[2]) / 400)) * 400;
+                console.log(date1[2], date2[2], result);
+            }
+            if (date2[2] > date1[2]) {
+                for (date1[2]; date1[2] <= date2[2]; ++date1[2]) {
+                    if (leapYearCheck(date1[2], date1[3])) {
+                        result++;
+                    }
+                    console.log(date1[2], date2[2], result);
+                }
+            }
+        }
+        if ((date1[2] <= FIRST_GRIGORIAN_YEAR) && (date2[2] >= FIRST_GRIGORIAN_YEAR)) {
+            result = 0;
+            //5 - 15 October 1582
         }
     }
 
     if ((date1[3] != date2[3])) {
         //BC and AD
-        if (((date1[2] + date2[2])) >= 400) {
-            result += (Math.floor((date1[2] - date2[2]) / 400) * 100);
-            date1[2] -= (Math.floor((date1[2] - date2[2]) / 400)) * 400;
-            console.log(date1[2], date2[2], result);
+        if (date2[2] < FIRST_GRIGORIAN_YEAR) {
+            result = 0;
         }
-        if ((date1[2] > date2[2]) || ((date1[2] == date2[2]) && (date2[1] > 1))) {
-            for (date2[2]; date2[2] <= date1[2]; ++date2[2]) {
-                if (leapYearCheck(date2[2], date2[3])) {
-                    result++;
-                }
-                console.log(date1[2], date2[2], result);
-            }
+        if (date2[2] >= FIRST_GRIGORIAN_YEAR) {
+            result = 0;
         }
     }
-
     return result;
 }
