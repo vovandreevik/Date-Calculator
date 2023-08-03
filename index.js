@@ -165,8 +165,9 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
 
     if ((date1[3] == date2[3]) && date1[3] == 1) {
         //AD
+        ///????
         if ((date1[2] < FIRST_GRIGORIAN_YEAR) && (date2[2] > FIRST_GRIGORIAN_YEAR)) { /// ??? > / >=
-
+            
         } else {
             result = date2[0] - date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
                 - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date2[2] - date1[2]) * 365;
@@ -178,6 +179,7 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
             - numberOfDaysSinceTheBeginningOfTheYear(date1) + (date1[2] - date2[2]) * 365;
     } else {
         // BC and AD
+        // ??? 
         result = date2[0] + date1[0] + numberOfDaysSinceTheBeginningOfTheYear(date2)
             + (365 - numberOfDaysSinceTheBeginningOfTheYear(date1)) + (date2[2] + date1[2] - 1) * 365;
     }
