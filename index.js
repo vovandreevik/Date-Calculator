@@ -3,6 +3,8 @@ document.getElementById("day2").value = tempDate.getDate();
 document.getElementById("month2").selectedIndex = tempDate.getMonth();
 document.getElementById("year2").value = tempDate.getFullYear();
 
+
+
 const FIRST_GRIGORIAN_YEAR = 1582;
 
 function dateCalculator() {
