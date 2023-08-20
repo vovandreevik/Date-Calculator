@@ -197,8 +197,6 @@ function calculateNumberOfDaysInLeapYears(date1, date2) {
   // date = [era, year, month, day];
   let result = 0;
 
-
-
   if (changingJulianToGregorian(date1, date2)){
     console.log("Gregorian")
     result += JulianCalendar(date1, date2) + GregorianCalendar(date1, date2);
@@ -263,6 +261,7 @@ function JulianCalendarAD(date1, date2){
       }
     }
   }
+  return 0;
 }
 
 function GregorianCalendar(date1, date2){
