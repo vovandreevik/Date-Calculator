@@ -34,10 +34,11 @@ function dateCalculator() {
 
   if (checkingTheValidityOfDates(date1, date2)) {
     const dateArray = gettingDatesInChronologicalOrder(date1, date2);
-    // const datesDifference = calculatingTheDateDifference(dateArray);
+    const datesDifference = calculatingTheDateDifference(dateArray);
     // const event = whatEventHappend(dateArray);
     const datesDifferenceInDays = calculatingTheDatesDifferenceInDays(dateArray);
-    document.getElementById("result").innerHTML = datesDifferenceInDays;
+    document.getElementById("result").innerHTML = datesDifferenceInDays +
+    "<br> or <br>" + datesDifference;
   }
 }
 
@@ -80,34 +81,34 @@ function checkingTheValidityOfDates(date1, date2) {
   months[1] = leapYearCheck(date1) ? 29 : 28;
 
   if (date1[3] % 1 != 0 || date1[3] < 1 || date1[3] > months[date1[2]]) {
-    errorStr += "The first day is incorrect!";
+    errorStr += "The first day is incorrect!#";
     result = false;
   }
 
   months[1] = leapYearCheck(date2) ? 29 : 28;
 
   if (date2[3] % 1 != 0 || date2[3] < 1 || date2[3] > months[date2[2]]) {
-    errorStr += " The second day is incorrect!";
+    errorStr += "The second day is incorrect!#";
     result = false;
   }
 
   if (date1[1] % 1 != 0 || date1[1] < 1) {
-    errorStr += " The first year is incorrect!";
+    errorStr += "The first year is incorrect!#";
     result = false;
   }
 
   if (date2[1] % 1 != 0 || date2[1] < 1) {
-    errorStr += " The second year is incorrect!";
+    errorStr += "The second year is incorrect!#";
     result = false;
   }
 
   if (date1[0] == -1) {
-    errorStr += " Choose the first era!";
+    errorStr += "Choose the first era!#";
     result = false;
   }
 
   if (date2[0] == -1) {
-    errorStr += " Choose the second era!";
+    errorStr += "Choose the second era!#";
     result = false;
   }
 
@@ -172,7 +173,6 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
       (date2[1] - FIRST_AD_DATE[1]) * 365;
     result = tempResult1 + tempResult2 + 1;
   }
-  console.log(result);
   result += calculatingNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
 
   return result == 1 ? "1 day": result + " days";
@@ -203,7 +203,6 @@ function calculatingNumberOfDaysInLeapYears(date1, date2) {
     result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) + 
       calculatingNumberOfDaysInLeapYearsHelperAD(FIRST_AD_DATE, date2);
   }
-  console.log(result);
   return result;
 }
 
@@ -258,5 +257,10 @@ function changingJulianToGregorian(date1, date2) {
     (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
       return 10;
   }
-  return null;
+  return 0;
+}
+
+function calculatingTheDateDifference(dateArray){
+  let result = ""
+  return result;
 }
