@@ -4,6 +4,8 @@ document.getElementById("month2").selectedIndex = tempDate2.getMonth();
 document.getElementById("year2").value = tempDate2.getFullYear();
 
 const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
+const LAST_BC_DATE = [0, 1, 11, 31];
+const FIRST_AD_DATE = [1, 1, 0, 1];
 
 document.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
@@ -146,6 +148,7 @@ function gettingDatesInChronologicalOrder(date1, date2) {
     if (date1[i] > date2[i]) {
       return [date2, date1];
     }
+    
   }
   return [date1, date2];
 }
@@ -163,28 +166,22 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
       numberOfDaysSinceTheBeginningOfTheYear(date1) + (Math.abs(date2[1] - date1[1])) * 365;
   } else {
     // BC and AD
-    const tempDate = [0, 1, 11, 31];
-    const tempResult1 = 31 - date1[3] - numberOfDaysSinceTheBeginningOfTheYear(date1) +
-      numberOfDaysSinceTheBeginningOfTheYear(tempDate) + (date1[1] - 1) * 365;
-    const tempResult2 = date2[3] - 1 + numberOfDaysSinceTheBeginningOfTheYear(date2) +
-      (date2[1] - 1) * 365;
+    const tempResult1 = LAST_BC_DATE[3] - date1[3] - numberOfDaysSinceTheBeginningOfTheYear(date1) +
+      numberOfDaysSinceTheBeginningOfTheYear(LAST_BC_DATE) + (date1[1] - LAST_BC_DATE[1]) * 365;
+    const tempResult2 = date2[3] - FIRST_AD_DATE[3] + numberOfDaysSinceTheBeginningOfTheYear(date2) +
+      (date2[1] - FIRST_AD_DATE[1]) * 365;
     result = tempResult1 + tempResult2 + 1;
   }
-  console.log(result)
-  result += calculateNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
+  console.log(result);
+  result += calculatingNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
 
-  if (result == 1) {
-    return "1 day";
-  }
-  return result + " days";
+  return result == 1 ? "1 day": result + " days";
 }
 
 function numberOfDaysSinceTheBeginningOfTheYear(date) {
   // date = [era, year, month, day];
   let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  if (leapYearCheck(date)) {
-    months[1] = 29;
-  }
+  months[1] = leapYearCheck(date) ? 29 : 28;
 
   let result = 0;
   for (let i = 0; i < date[2]; i++) {
@@ -193,55 +190,34 @@ function numberOfDaysSinceTheBeginningOfTheYear(date) {
   return result;
 }
 
-function calculateNumberOfDaysInLeapYears(date1, date2) {
+function calculatingNumberOfDaysInLeapYears(date1, date2) {
   // date = [era, year, month, day];
   let result = 0;
-
-  if (changingJulianToGregorian(date1, date2)){
-    console.log("Gregorian")
-    result += JulianCalendar(date1, date2) + GregorianCalendar(date1, date2);
+  if (date1[0] == date2[0]){
+    if (date1[0] == 0){
+      result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2);
+    } else {
+      result += calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2);
+    } 
+  } else {
+    result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) + 
+      calculatingNumberOfDaysInLeapYearsHelperAD(FIRST_AD_DATE, date2);
   }
-  else {
-    console.log("Julian")
-    result += JulianCalendar(date1, date2);
-  }
+  console.log(result);
   return result;
 }
 
-function changingJulianToGregorian(date1, date2){
-  if ((date1 == gettingDatesInChronologicalOrder(date1, FIRST_GREGORIAN_DATE)[0]) &&
-      (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
-      return 10;
-    }
-  return 0;
-}
-
-function JulianCalendar(date1, date2){
-  if (date1[0] == date2[0]){
-    if (date1[0] == 0){
-      return JulianCalendarBC(date1, date2);
-    }
-    else {
-      return JulianCalendarAD(date1, date2)
-    }
-  } else {
-    const tempDate1 = [0, 1, 0, 1], tempDate2 = [1, 1, 0, 1]
-    return JulianCalendarBC(date1, tempDate1) + JulianCalendarAD(tempDate2, date2)
-  }
-}
-
-function JulianCalendarBC(date1, date2){
-  console.log("!!!")
+function calculatingNumberOfDaysInLeapYearsHelperBC(tempDate1, tempDate2){
+  let date1 = tempDate1.slice();
+  let date2 = tempDate2.slice();
   let result = 0;
   if (date1[1] - date2[1] >= 400) {
     result += Math.floor((date1[1] - date2[1]) / 400) * 100;
     date1[1] -= Math.floor((date1[1] - date2[1]) / 400) * 400;
   }
-  console.log(result)
   if (date1[1] > date2[1]) {
-    let tempDate = date2;
-    for (tempDate[1]++; tempDate[1] <= date1[1]; ++tempDate[1]) {
-      if (leapYearCheck(tempDate)) {
+    for (date2[1]++; date2[1] <= date1[1]; ++date2[1]) {
+      if (leapYearCheck(date2)) {
         result++;
       }
     }
@@ -249,9 +225,22 @@ function JulianCalendarBC(date1, date2){
   return result;
 }
 
-function JulianCalendarAD(date1, date2){
+function calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2){
+  if (changingJulianToGregorian(date1, date2)){
+    return calculateExtraLeapDays(date1, FIRST_GREGORIAN_DATE, 100) + 
+      calculateExtraLeapDays(FIRST_GREGORIAN_DATE, date2, 97);
+  } else {
+    const extraDays = date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1] ? 97 : 100;
+    return calculateExtraLeapDays(date1, date2, extraDays);
+  }
+}
+
+function calculateExtraLeapDays(tempDate1, tempDate2, extraDays){
+  let date1 = tempDate1.slice();
+  let date2 = tempDate2.slice();
+  let result = 0;
   if (date2[1] - date1[1] >= 400) {
-    result += Math.floor((date2[1] - date1[1]) / 400) * 100;
+    result += Math.floor((date2[1] - date1[1]) / 400) * extraDays;
     date2[1] -= Math.floor((date2[1] - date1[1]) / 400) * 400;
   }
   if (date2[1] > date1[1]) {
@@ -261,48 +250,13 @@ function JulianCalendarAD(date1, date2){
       }
     }
   }
-  return 0;
+  return result;
 }
 
-function GregorianCalendar(date1, date2){
-  return 0;
+function changingJulianToGregorian(date1, date2) {
+  if ((date1 == gettingDatesInChronologicalOrder(date1, FIRST_GREGORIAN_DATE)[0]) &&
+    (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
+      return 10;
+  }
+  return null;
 }
-
-      // if (date1[0] == date2[0]) {
-      //   if (date1[0] == 1) {
-          
-      //   } else {
-      //     // BC
-
-      //     result += JulianCalendarBC(date1, date2);
-      //   }
-      // } else {
-      //   //BC and AD before 15.10.1582
-      //   const tempDate1 = [0, 1, 0, 1];
-      //   if (date1[1] - tempDate1[1] >= 400) {
-      //     result += Math.floor((date1[1] - tempDate1[1]) / 400) * 100;
-      //     date1[1] -= Math.floor((date1[1] - tempDate1[1]) / 400) * 400;
-      //   }
-      //   if (date1[1] > tempDate1[1]) {
-      //     for (tempDate1[1]; tempDate1[1] <= date1[1]; ++tempDate1[1]) {
-      //       if (leapYearCheck(tempDate1)) {
-      //         result++;
-      //       }
-      //     }
-      //   }
-      //   const tempDate2 = [1, 1, 0, 1];
-      //   if (date2[1] - tempDate2[1] >= 400) {
-      //     result += Math.floor((date2[1] - tempDate2[1]) / 400) * 97;
-      //     date2[1] -= Math.floor((date2[1] - tempDate2[1]) / 400) * 400;
-      //   }
-      //   if (date2[1] > tempDate2[1]) {
-      //     for (tempDate2[1]; tempDate2[1] < date2[1]; ++tempDate2[1]) {
-      //       if (leapYearCheck(tempDate2)) {
-      //         result++;
-      //       }
-      //     }
-      //   }
-      // }
-
-
-
