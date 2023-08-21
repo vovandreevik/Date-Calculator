@@ -34,11 +34,10 @@ function dateCalculator() {
 
   if (checkingTheValidityOfDates(date1, date2)) {
     const dateArray = gettingDatesInChronologicalOrder(date1, date2);
-    const datesDifference = calculatingTheDateDifference(dateArray);
     // const event = whatEventHappend(dateArray);
     const datesDifferenceInDays = calculatingTheDatesDifferenceInDays(dateArray);
-    document.getElementById("result").innerHTML = datesDifferenceInDays +
-    "<br> or <br>" + datesDifference;
+    const datesDifference = calculatingTheDateDifference(dateArray, parseInt(datesDifferenceInDays.split(" ")[0]));
+    document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
   }
 }
 
@@ -149,7 +148,7 @@ function gettingDatesInChronologicalOrder(date1, date2) {
     if (date1[i] > date2[i]) {
       return [date2, date1];
     }
-    
+
   }
   return [date1, date2];
 }
@@ -175,7 +174,7 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
   }
   result += calculatingNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
 
-  return result == 1 ? "1 day": result + " days";
+  return result == 1 ? "1 day" : result + " days";
 }
 
 function numberOfDaysSinceTheBeginningOfTheYear(date) {
@@ -193,20 +192,20 @@ function numberOfDaysSinceTheBeginningOfTheYear(date) {
 function calculatingNumberOfDaysInLeapYears(date1, date2) {
   // date = [era, year, month, day];
   let result = 0;
-  if (date1[0] == date2[0]){
-    if (date1[0] == 0){
+  if (date1[0] == date2[0]) {
+    if (date1[0] == 0) {
       result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2);
     } else {
       result += calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2);
-    } 
+    }
   } else {
-    result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) + 
+    result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) +
       calculatingNumberOfDaysInLeapYearsHelperAD(FIRST_AD_DATE, date2);
   }
   return result;
 }
 
-function calculatingNumberOfDaysInLeapYearsHelperBC(tempDate1, tempDate2){
+function calculatingNumberOfDaysInLeapYearsHelperBC(tempDate1, tempDate2) {
   let date1 = tempDate1.slice();
   let date2 = tempDate2.slice();
   let result = 0;
@@ -224,9 +223,9 @@ function calculatingNumberOfDaysInLeapYearsHelperBC(tempDate1, tempDate2){
   return result;
 }
 
-function calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2){
-  if (changingJulianToGregorian(date1, date2)){
-    return calculateExtraLeapDays(date1, FIRST_GREGORIAN_DATE, 100) + 
+function calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2) {
+  if (changingJulianToGregorian(date1, date2)) {
+    return calculateExtraLeapDays(date1, FIRST_GREGORIAN_DATE, 100) +
       calculateExtraLeapDays(FIRST_GREGORIAN_DATE, date2, 97);
   } else {
     const extraDays = date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1] ? 97 : 100;
@@ -234,7 +233,7 @@ function calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2){
   }
 }
 
-function calculateExtraLeapDays(tempDate1, tempDate2, extraDays){
+function calculateExtraLeapDays(tempDate1, tempDate2, extraDays) {
   let date1 = tempDate1.slice();
   let date2 = tempDate2.slice();
   let result = 0;
@@ -255,12 +254,84 @@ function calculateExtraLeapDays(tempDate1, tempDate2, extraDays){
 function changingJulianToGregorian(date1, date2) {
   if ((date1 == gettingDatesInChronologicalOrder(date1, FIRST_GREGORIAN_DATE)[0]) &&
     (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
-      return 10;
+    return 10;
   }
   return 0;
 }
 
-function calculatingTheDateDifference(dateArray){
-  let result = ""
+function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
+  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let result = "";
+  let date1 = dateArray[0].slice();
+  let date2 = dateArray[1].slice();
+  let numberOfYears = 0;
+  let numberOfMOnths = 0;
+  let numberOfDays = 0;
+  datesDifferenceInDays += calculatingTheDateDifferenceHelper(date1, date2) -
+    calculatingNumberOfDaysInLeapYears(date1, date2) + changingJulianToGregorian(date1, date2);
+
+  if (date1[0] == date2[0]) {
+    if (datesDifferenceInDays >= 365) {
+      numberOfYears = Math.abs(date2[1] - date1[1] - 1);
+      datesDifferenceInDays -= Math.abs(date2[1] - date1[1] - 1) * 365;
+      while (datesDifferenceInDays >= 365) {
+        numberOfYears++;
+        datesDifferenceInDays -= 365;
+      }
+      if (numberOfYears) {
+        result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
+      }
+    }
+    if (datesDifferenceInDays >= 28) {
+      if (date2[2] > date1[2]) {
+        for (date1[2]; date1[2] < date2[2]; date1[2]++) {
+          if (datesDifferenceInDays - months[date1[2]] >= 0) {
+            numberOfMOnths++;
+            datesDifferenceInDays -= months[date1[2]];
+          }
+        }
+      }
+      }
+      if (date2[2] < date1[2]) {
+        // for (date1[2]; date1[2] < date2[2]; date1[2]++) {
+        //   console.log(datesDifferenceInDays, months[date1[2]])
+        //   if (datesDifferenceInDays - months[date1[2]] > 0){
+          
+        //     console.log(datesDifferenceInDays)
+        //     numberOfMOnths++;
+        //     datesDifferenceInDays -= months[date1[2]];
+        //   }
+        // }
+        // if (datesDifferenceInDays >= months[date1[2]]) {
+        //   console.log("!!!!")
+        //   numberOfMOnths++;
+        //   datesDifferenceInDays -= months[date1[2]];
+        // }
+      }
+
+      if (numberOfMOnths){
+        result += numberOfMOnths == 1 ? " 1 month" : ` ${numberOfMOnths} months`;
+      }
+      
+    }
+    numberOfDays = datesDifferenceInDays;
+    if (datesDifferenceInDays && result) {
+      result += datesDifferenceInDays == 1 ? " 1 day" : ` ${numberOfDays} days`;
+    }
+  return result ? "<br> or <br>" + result : result;
+  }
+  
+
+
+function calculatingTheDateDifferenceHelper(date1, date2) {
+  // the function corrects calculatingNumberOfDaysInLeapYears
+  // that the leap day count meets the requirements of the calculatingTheDateDifference
+  let result = 0;
+  if (leapYearCheck(date1) && date1[2] >= 2) {
+    result++;
+  }
+  if (leapYearCheck(date2) && date2[2] >= 2) {
+    result--;
+  }
   return result;
 }
