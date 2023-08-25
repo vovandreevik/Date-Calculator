@@ -272,8 +272,8 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
 
   if (date1[0] == date2[0]) {
     if (datesDifferenceInDays >= 365) {
-      numberOfYears = Math.abs(date2[1] - date1[1] - 1);
-      datesDifferenceInDays -= Math.abs(date2[1] - date1[1] - 1) * 365;
+      numberOfYears = (Math.abs(date2[1] - date1[1]) - 1);
+      datesDifferenceInDays -= (Math.abs(date2[1] - date1[1]) - 1) * 365;
       while (datesDifferenceInDays >= 365) {
         numberOfYears++;
         datesDifferenceInDays -= 365;
@@ -282,46 +282,47 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
         result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
       }
     }
-    if (datesDifferenceInDays >= 28) {
-      if (date2[2] > date1[2]) {
-        for (date1[2]; date1[2] < date2[2]; date1[2]++) {
-          if (datesDifferenceInDays - months[date1[2]] >= 0) {
-            numberOfMOnths++;
-            datesDifferenceInDays -= months[date1[2]];
-          }
+  }
+
+  if (datesDifferenceInDays >= 28) {
+    if (date2[2] > date1[2]) {
+      for (date1[2]; date1[2] < date2[2]; date1[2]++) {
+        if (datesDifferenceInDays - months[date1[2]] >= 0) {
+          numberOfMOnths++;
+          datesDifferenceInDays -= months[date1[2]];
         }
       }
-      }
-      if (date2[2] < date1[2]) {
-        // for (date1[2]; date1[2] < date2[2]; date1[2]++) {
-        //   console.log(datesDifferenceInDays, months[date1[2]])
-        //   if (datesDifferenceInDays - months[date1[2]] > 0){
-          
-        //     console.log(datesDifferenceInDays)
-        //     numberOfMOnths++;
-        //     datesDifferenceInDays -= months[date1[2]];
-        //   }
-        // }
-        // if (datesDifferenceInDays >= months[date1[2]]) {
-        //   console.log("!!!!")
-        //   numberOfMOnths++;
-        //   datesDifferenceInDays -= months[date1[2]];
-        // }
-      }
-
-      if (numberOfMOnths){
-        result += numberOfMOnths == 1 ? " 1 month" : ` ${numberOfMOnths} months`;
-      }
-      
     }
-    numberOfDays = datesDifferenceInDays;
-    if (datesDifferenceInDays && result) {
-      result += datesDifferenceInDays == 1 ? " 1 day" : ` ${numberOfDays} days`;
+    if (date2[2] < date1[2]) {
+      numberOfMOnths += (11 - date1[2]);
+      for (date1[2]; date1[2] < 11; date1[2]++) {
+          datesDifferenceInDays -= months[date1[2]];
+          console.log(date1[2], datesDifferenceInDays)
+      }
+      let i = 0
+      for (i; i < date2[2]; i++) {
+        if (datesDifferenceInDays - months[i] > 0){
+          numberOfMOnths++;
+          datesDifferenceInDays -= months[i];
+        }
+      }
+      if (datesDifferenceInDays >= months[i]) {
+        numberOfMOnths++;
+        datesDifferenceInDays -= months[i];
+      }
     }
-  return result ? "<br> or <br>" + result : result;
   }
-  
+  if (numberOfMOnths) {
+    result += numberOfMOnths == 1 ? " 1 month" : ` ${numberOfMOnths} months`;
+  }
 
+  numberOfDays = datesDifferenceInDays;
+  if (datesDifferenceInDays && result) {
+    result += datesDifferenceInDays == 1 ? " 1 day" : ` ${numberOfDays} days`;
+  }
+
+  return result ? "<br> or <br>" + result : result;
+}
 
 function calculatingTheDateDifferenceHelper(date1, date2) {
   // the function corrects calculatingNumberOfDaysInLeapYears
