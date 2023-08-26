@@ -20,16 +20,16 @@ function dateCalculator() {
 
   const date1 = [
     checkEra(document.getElementsByName("era1")),
-    parseInt(document.getElementById("year1").value),
+    parseFloat(document.getElementById("year1").value),
     document.getElementById("month1").selectedIndex,
-    parseInt(document.getElementById("day1").value),
+    parseFloat(document.getElementById("day1").value),
   ];
 
   const date2 = [
     checkEra(document.getElementsByName("era2")),
-    parseInt(document.getElementById("year2").value),
+    parseFloat(document.getElementById("year2").value),
     document.getElementById("month2").selectedIndex,
-    parseInt(document.getElementById("day2").value),
+    parseFloat(document.getElementById("day2").value),
   ];
 
   if (checkingTheValidityOfDates(date1, date2)) {
@@ -96,6 +96,11 @@ function checkingTheValidityOfDates(date1, date2) {
 
   if (date2[1] % 1 != 0 || date2[1] < 1) {
     errorStr += "The second year is incorrect!#";
+    result = false;
+  }
+
+  if ((date1[1] + date2[1]) > Number.MAX_SAFE_INTEGER || (date2[2] - date1[1]) > Number.MAX_SAFE_INTEGER) {
+    errorStr += "TOO BIG#";
     result = false;
   }
 
@@ -170,7 +175,6 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
     result = tempResult1 + tempResult2 + 1;
   }
   result += calculatingNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
-
   return result == 1 ? "1 day" : `${result} days`;
 }
 
@@ -279,23 +283,24 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
         numberOfYears++;
         datesDifferenceInDays -= 365;
       }
-      if (numberOfYears) {
-        result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
-      }
     }
   } else {
     datesDifferenceInDays--;
     if (datesDifferenceInDays >= 365) {
       numberOfYears = date1[1];
       datesDifferenceInDays -= date1[1] * 365;
+      if (datesDifferenceInDays >= 365) {
+        numberOfYears += date2[1] - 1;
+        datesDifferenceInDays -= (date2[1] - 1) * 365;
+      }
       while (datesDifferenceInDays >= 365) {
         numberOfYears++;
         datesDifferenceInDays -= 365;
       }
-      if (numberOfYears) {
-        result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
-      }
     }
+  }
+  if (numberOfYears) {
+    result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
   }
 
   //number of months
