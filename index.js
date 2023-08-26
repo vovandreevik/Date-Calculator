@@ -275,29 +275,23 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
     calculatingNumberOfDaysInLeapYears(date1, date2) + changingJulianToGregorian(date1, date2);
 
   //number of years
-  if (date1[0] == date2[0]) {
-    if (datesDifferenceInDays >= 365) {
+  if (datesDifferenceInDays >= 365) {
+    if (date1[0] == date2[0]) {
       numberOfYears = (Math.abs(date2[1] - date1[1]) - 1);
       datesDifferenceInDays -= (Math.abs(date2[1] - date1[1]) - 1) * 365;
-      while (datesDifferenceInDays >= 365) {
-        numberOfYears++;
-        datesDifferenceInDays -= 365;
-      }
-    }
-  } else {
-    datesDifferenceInDays--;
-    if (datesDifferenceInDays >= 365) {
+    } else {
+      datesDifferenceInDays--;
       numberOfYears = date1[1];
       datesDifferenceInDays -= date1[1] * 365;
       if (datesDifferenceInDays >= 365) {
         numberOfYears += date2[1] - 1;
         datesDifferenceInDays -= (date2[1] - 1) * 365;
       }
-      while (datesDifferenceInDays >= 365) {
-        numberOfYears++;
-        datesDifferenceInDays -= 365;
-      }
     }
+  }
+  while (datesDifferenceInDays >= 365) {
+    numberOfYears++;
+    datesDifferenceInDays -= 365;
   }
   if (numberOfYears) {
     result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
