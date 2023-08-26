@@ -100,7 +100,7 @@ function checkingTheValidityOfDates(date1, date2) {
   }
 
   if ((date1[1] + date2[1]) > Number.MAX_SAFE_INTEGER || (date2[2] - date1[1]) > Number.MAX_SAFE_INTEGER) {
-    errorStr += "TOO BIG#";
+    errorStr += "Enter a smaller year!#";
     result = false;
   }
 
@@ -194,13 +194,10 @@ function calculatingNumberOfDaysInLeapYears(date1, date2) {
   // date = [era, year, month, day];
   let result = 0;
   if (date1[0] == date2[0]) {
-    if (date1[0] == 0) {
-      result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2);
-    } else {
-      result += calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2);
-    }
+    result = (date1 == 0) ? calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2):
+      calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2);
   } else {
-    result += calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) +
+    result = calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) +
       calculatingNumberOfDaysInLeapYearsHelperAD(FIRST_AD_DATE, date2);
   }
   return result;
@@ -230,7 +227,7 @@ function calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2) {
     return calculateExtraLeapDays(date1, FIRST_GREGORIAN_DATE, 100) +
       calculateExtraLeapDays(FIRST_GREGORIAN_DATE, date2, 97);
   } else {
-    const extraDays = date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1] ? 97 : 100;
+    const extraDays = (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1]) ? 97 : 100;
     return calculateExtraLeapDays(date1, date2, extraDays);
   }
 }
@@ -299,10 +296,7 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
   //number of months
   if (datesDifferenceInDays >= 28) {
     if (date2[2] > date1[2]) {
-      console.log(numberOfMOnths, datesDifferenceInDays);
       [numberOfMOnths, datesDifferenceInDays] = numberOfMonthsHelper(date1[2], date2[2], numberOfMOnths, datesDifferenceInDays);
-      console.log(numberOfMOnths, datesDifferenceInDays);
-      
     }
     if (date2[2] < date1[2]) {
       [numberOfMOnths, datesDifferenceInDays] = numberOfMonthsHelper(date1[2], 11, numberOfMOnths, datesDifferenceInDays);
@@ -335,7 +329,7 @@ function calculatingTheDateDifferenceHelper(date1, date2) {
   return result;
 }
 
-function numberOfMonthsHelper(month1, month2, numberOfMOnths, datesDifferenceInDays){
+function numberOfMonthsHelper(month1, month2, numberOfMOnths, datesDifferenceInDays) {
   let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   for (let i = month1; i <= month2; i++) {
     if (datesDifferenceInDays - months[i] >= 0) {
