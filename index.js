@@ -263,7 +263,6 @@ function changingJulianToGregorian(date1, date2) {
 }
 
 function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
-  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let result = "";
   // date = [era, year, month, day];
   let date1 = dateArray[0].slice();
@@ -300,31 +299,14 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
   //number of months
   if (datesDifferenceInDays >= 28) {
     if (date2[2] > date1[2]) {
-      for (date1[2]; date1[2] < date2[2]; date1[2]++) {
-        if (datesDifferenceInDays - months[date1[2]] >= 0) {
-          numberOfMOnths++;
-          datesDifferenceInDays -= months[date1[2]];
-        }
-      }
+      console.log(numberOfMOnths, datesDifferenceInDays);
+      [numberOfMOnths, datesDifferenceInDays] = numberOfMonthsHelper(date1[2], date2[2], numberOfMOnths, datesDifferenceInDays);
+      console.log(numberOfMOnths, datesDifferenceInDays);
+      
     }
     if (date2[2] < date1[2]) {
-      for (date1[2]; date1[2] <= 11; date1[2]++) {
-        if (datesDifferenceInDays - months[date1[2]] >= 0) {
-          numberOfMOnths++;
-          datesDifferenceInDays -= months[date1[2]];
-        }
-      }
-      let i = 0
-      for (i; i < date2[2]; i++) {
-        if (datesDifferenceInDays - months[i] >= 0) {
-          numberOfMOnths++;
-          datesDifferenceInDays -= months[i];
-        }
-      }
-      if (datesDifferenceInDays >= months[i]) {
-        numberOfMOnths++;
-        datesDifferenceInDays -= months[i];
-      }
+      [numberOfMOnths, datesDifferenceInDays] = numberOfMonthsHelper(date1[2], 11, numberOfMOnths, datesDifferenceInDays);
+      [numberOfMOnths, datesDifferenceInDays] = numberOfMonthsHelper(0, date2[2], numberOfMOnths, datesDifferenceInDays);
     }
   }
   if (numberOfMOnths) {
@@ -351,4 +333,15 @@ function calculatingTheDateDifferenceHelper(date1, date2) {
     result--;
   }
   return result;
+}
+
+function numberOfMonthsHelper(month1, month2, numberOfMOnths, datesDifferenceInDays){
+  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  for (let i = month1; i <= month2; i++) {
+    if (datesDifferenceInDays - months[i] >= 0) {
+      numberOfMOnths++;
+      datesDifferenceInDays -= months[i];
+    }
+  }
+  return [numberOfMOnths, datesDifferenceInDays];
 }
