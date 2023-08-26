@@ -31,7 +31,7 @@ function dateCalculator() {
     document.getElementById("month2").selectedIndex,
     parseFloat(document.getElementById("day2").value),
   ];
-
+console.log(date1, date2)
   if (checkingTheValidityOfDates(date1, date2)) {
     const dateArray = gettingDatesInChronologicalOrder(date1, date2);
     // const event = whatEventHappend(dateArray);
@@ -280,8 +280,8 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
       numberOfYears = date1[1];
       datesDifferenceInDays -= date1[1] * 365;
       if (datesDifferenceInDays >= 365) {
-        numberOfYears += date2[1] - 1;
-        datesDifferenceInDays -= (date2[1] - 1) * 365;
+        numberOfYears += date2[1] - 2;
+        datesDifferenceInDays -= (date2[1] - 2) * 365;
       }
     }
   }

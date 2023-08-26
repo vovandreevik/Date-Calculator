@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru, en">
+<html lang="en">
 
 <head>
     <title id="title">Amazing Date Calculator</title>
@@ -10,8 +10,11 @@
 
 <body>
     <div class="DateCalculator">
+        <div class="LanguageButton">
+            
+        </div>
         <div class="FirstDate">
-            <h1 id="date1hadder">Enter first date</h1>
+            <h1 id="date1header">Enter first date</h1>
             <div class="Day">
                 <label for="day1" class="Text">Day</label>
                 <input name="day" type="number" id="day1" max="31" min="1" value="1">
@@ -19,18 +22,18 @@
             <div class="Month">
                 <label for="month1" class="Text">Month</label>
                 <select name="month" id="month1">
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
+                    <option value="January" id="January">January</option>
+                    <option value="February" id="February">February</option>
+                    <option value="March" id="March">March</option>
+                    <option value="April" id="April">April</option>
+                    <option value="May" id="May">May</option>
+                    <option value="June" id="June">June</option>
+                    <option value="July" id="July">July</option>
+                    <option value="August" id="August">August</option>
+                    <option value="September" id="September">September</option>
+                    <option value="October" id="October">October</option>
+                    <option value="November" id="November">November</option>
+                    <option value="December" id="December">December</option>
                 </select>
             </div>
             <div class="Year">
@@ -44,7 +47,7 @@
         </div>
 
         <div class="SecondDate">
-            <h1>Enter second date</h1>
+            <h1 id="date2header">Enter second date</h1>
             <div class="Day">
                 <label for="day2" class="Text">Day</label>
                 <input name="day" type="number" id="day2" max="31" min="1">
@@ -52,18 +55,18 @@
             <div class="Month">
                 <label for="month2" class="Text">Month</label>
                 <select name="month" id="month2">
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
+                                        <option value="January" id="January">January</option>
+                                        <option value="February" id="February">February</option>
+                                        <option value="March" id="March">March</option>
+                                        <option value="April" id="April">April</option>
+                                        <option value="May" id="May">May</option>
+                                        <option value="June" id="June">June</option>
+                                        <option value="July" id="July">July</option>
+                                        <option value="August" id="August">August</option>
+                                        <option value="September" id="September">September</option>
+                                        <option value="October" id="October">October</option>
+                                        <option value="November" id="November">November</option>
+                                        <option value="December" id="December">December</option>
                 </select>
             </div>
             <div class="Year">
@@ -82,13 +85,10 @@
         </div>
 
         <div class="Errors">
-
             <p id="errors"></p>
         </div>
     </div>
-
     <script src="index.js"></script>
-
 </body>
 
 </html>
