@@ -31,7 +31,7 @@ function dateCalculator() {
     document.getElementById("month2").selectedIndex,
     parseFloat(document.getElementById("day2").value),
   ];
-console.log(date1, date2)
+
   if (checkingTheValidityOfDates(date1, date2)) {
     const dateArray = gettingDatesInChronologicalOrder(date1, date2);
     // const event = whatEventHappend(dateArray);

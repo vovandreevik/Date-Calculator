@@ -10,72 +10,75 @@
 
 <body>
     <div class="DateCalculator">
-        <div class="LanguageButton">
-            
+        <div class="LanguageSelect">
+            <select id="LanguageSelect">
+                <option value="en">EN</option>
+                <option value="ru">RU</option>
+            </select>
         </div>
         <div class="FirstDate">
             <h1 id="date1header">Enter first date</h1>
             <div class="Day">
-                <label for="day1" class="Text">Day</label>
+                <label for="day1" class="Text" id="day1Label">Day</label>
                 <input name="day" type="number" id="day1" max="31" min="1" value="1">
             </div>
             <div class="Month">
-                <label for="month1" class="Text">Month</label>
+                <label for="month1" class="Text" id="month1Label">Month</label>
                 <select name="month" id="month1">
-                    <option value="January" id="January">January</option>
-                    <option value="February" id="February">February</option>
-                    <option value="March" id="March">March</option>
-                    <option value="April" id="April">April</option>
-                    <option value="May" id="May">May</option>
-                    <option value="June" id="June">June</option>
-                    <option value="July" id="July">July</option>
-                    <option value="August" id="August">August</option>
-                    <option value="September" id="September">September</option>
-                    <option value="October" id="October">October</option>
-                    <option value="November" id="November">November</option>
-                    <option value="December" id="December">December</option>
+                    <option value="January" id="January1">January</option>
+                    <option value="February" id="February1">February</option>
+                    <option value="March" id="March1">March</option>
+                    <option value="April" id="April1">April</option>
+                    <option value="May" id="May1">May</option>
+                    <option value="June" id="June1">June</option>
+                    <option value="July" id="July1">July</option>
+                    <option value="August" id="August1">August</option>
+                    <option value="September" id="September1">September</option>
+                    <option value="October" id="October1">October</option>
+                    <option value="November" id="November1">November</option>
+                    <option value="December" id="December1">December</option>
                 </select>
             </div>
             <div class="Year">
-                <label for="year1" class="Text">Year</label>
+                <label for="year1" class="Text" id="year1Label">Year</label>
                 <input type="number" name="year" id="year1" value="45" min="1">
                 <input type="radio" name="era1" id="BC1" checked>
-                <label for="BC1" class="Text">BC</label>
+                <label for="BC1" class="Text" id="BC1Label">BC</label>
                 <input type="radio" name="era1" id="AD1">
-                <label for="AD1" class="Text">AD</label>
+                <label for="AD1" class="Text" id="AD1Label">AD</label>
             </div>
         </div>
 
         <div class="SecondDate">
             <h1 id="date2header">Enter second date</h1>
             <div class="Day">
-                <label for="day2" class="Text">Day</label>
+                <label for="day2" class="Text" id="day2Label">Day</label>
                 <input name="day" type="number" id="day2" max="31" min="1">
             </div>
             <div class="Month">
-                <label for="month2" class="Text">Month</label>
+                <label for="month2" class="Text" id="month2Label">Month</label>
                 <select name="month" id="month2">
-                                        <option value="January" id="January">January</option>
-                                        <option value="February" id="February">February</option>
-                                        <option value="March" id="March">March</option>
-                                        <option value="April" id="April">April</option>
-                                        <option value="May" id="May">May</option>
-                                        <option value="June" id="June">June</option>
-                                        <option value="July" id="July">July</option>
-                                        <option value="August" id="August">August</option>
-                                        <option value="September" id="September">September</option>
-                                        <option value="October" id="October">October</option>
-                                        <option value="November" id="November">November</option>
-                                        <option value="December" id="December">December</option>
+                    <option value="January" id="January2">January</option>
+                    <option value="February" id="February2">February</option>
+                    <option value="March" id="March2">March</option>
+                    <option value="April" id="April2">April</option>
+                    <option value="May" id="May2">May</option>
+                    <option value="June" id="June2">June</option>
+                    <option value="July" id="July2">July</option>
+                    <option value="August" id="August2">August</option>
+                    <option value="September" id="September2">September</option>
+                    <option value="October" id="October2">October</option>
+                    <option value="November" id="November2">November</option>
+                    <option value="December" id="December2">December</option>
                 </select>
             </div>
             <div class="Year">
-                <label for="year2" class="Text">Year</label>
+                <label for="year2" class="Text" id="year2Label">Year</label>
                 <input type="number" name="year" id="year2" min="1">
                 <input type="radio" name="era2" id="BC2">
-                <label for="BC2" class="Text">BC</label>
+                <label for="BC2" class="Text" id="BC2Label">BC</label>
                 <input type="radio" name="era2" id="AD2" checked>
-                <label for="AD2" class="Text">AD</label>
+                <label for="AD2" class="Text" id="AD2Label">AD</label>
             </div>
         </div>
 
@@ -89,6 +92,9 @@
         </div>
     </div>
     <script src="index.js"></script>
+    <script src="dictionary.js"></script>
+    <script src="localization.js"></script>
+
 </body>
 
 </html>
