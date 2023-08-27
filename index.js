@@ -79,57 +79,51 @@ function checkingTheValidityOfDates(date1, date2) {
 
   months[1] = leapYearCheck(date1) ? 29 : 28;
   if (date1[3] % 1 != 0 || date1[3] < 1 || date1[3] > months[date1[2]]) {
-    errorStr += "The first day is incorrect!#";
+    errorStr += checkingTheValidityOfDatesLocalization("day1");
     result = false;
   }
 
   months[1] = leapYearCheck(date2) ? 29 : 28;
   if (date2[3] % 1 != 0 || date2[3] < 1 || date2[3] > months[date2[2]]) {
-    errorStr += "The second day is incorrect!#";
+    errorStr += checkingTheValidityOfDatesLocalization("day2");
     result = false;
   }
 
   if (date1[1] % 1 != 0 || date1[1] < 1) {
-    errorStr += "The first year is incorrect!#";
+    errorStr += checkingTheValidityOfDatesLocalization("year1");
     result = false;
   }
 
   if (date2[1] % 1 != 0 || date2[1] < 1) {
-    errorStr += "The second year is incorrect!#";
+    errorStr += checkingTheValidityOfDatesLocalization("year2");
     result = false;
   }
 
   if ((date1[1] + date2[1]) > Number.MAX_SAFE_INTEGER || (date2[2] - date1[1]) > Number.MAX_SAFE_INTEGER) {
-    errorStr += "Enter a smaller year!#";
+    errorStr += checkingTheValidityOfDatesLocalization("tooBigYear");
     result = false;
   }
 
   if (date1[0] == -1) {
-    errorStr += "Choose the first era!#";
+    errorStr += checkingTheValidityOfDatesLocalization("era1");
     result = false;
   }
 
   if (date2[0] == -1) {
-    errorStr += "Choose the second era!#";
+    errorStr += checkingTheValidityOfDatesLocalization("era2");
     result = false;
   }
 
-  if (result) {
-    if (date1[0] == 1 && date1[1] == 1582 && date1[2] == 9) {
-      if (date1[3] > 4 && date1[3] < 15) {
-        errorStr += "GREGORIAN";
-        result = false;
-      }
-    }
-    if (date2[0] == 1 && date2[1] == 1582 && date2[2] == 9) {
-      if (date2[3] > 4 && date2[3] < 15) {
-        errorStr += "GREGORIAN";
-        result = false;
-      }
-    }
+  function isGregorianTransitionPeriod(date) {
+    return date[0] === 1 && date[1] === 1582 && date[2] === 9 && date[3] > 4 && date[3] < 15;
   }
 
-  document.getElementById("errors").innerHTML = errorStr;
+  if (result && (isGregorianTransitionPeriod(date1) || isGregorianTransitionPeriod(date2))) {
+    document.getElementById("errorNote").textContent = isGregorianTransitionPeriodLocalization();
+    result = false;
+  }
+
+  document.getElementById("errors").textContent = errorStr;
   return result;
 }
 
@@ -175,7 +169,7 @@ function calculatingTheDatesDifferenceInDays(dateArray) {
     result = tempResult1 + tempResult2 + 1;
   }
   result += calculatingNumberOfDaysInLeapYears(date1, date2) - changingJulianToGregorian(date1, date2);
-  return result == 1 ? "1 day" : `${result} days`;
+  return daysLocalization(result);
 }
 
 function numberOfDaysSinceTheBeginningOfTheYear(date) {
@@ -194,7 +188,7 @@ function calculatingNumberOfDaysInLeapYears(date1, date2) {
   // date = [era, year, month, day];
   let result = 0;
   if (date1[0] == date2[0]) {
-    result = (date1 == 0) ? calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2):
+    result = (date1 == 0) ? calculatingNumberOfDaysInLeapYearsHelperBC(date1, date2) :
       calculatingNumberOfDaysInLeapYearsHelperAD(date1, date2);
   } else {
     result = calculatingNumberOfDaysInLeapYearsHelperBC(date1, LAST_BC_DATE) +
@@ -290,7 +284,7 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
     datesDifferenceInDays -= 365;
   }
   if (numberOfYears) {
-    result += numberOfYears == 1 ? "1 year" : `${numberOfYears} years`;
+    result += yearsLocalization(numberOfYears);
   }
 
   //number of months
@@ -304,13 +298,14 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
     }
   }
   if (numberOfMOnths) {
-    result += numberOfMOnths == 1 ? " 1 month" : ` ${numberOfMOnths} months`;
+    result += result ? " " : "";
+    result += monthsLocalization(numberOfMOnths);
   }
 
   //number of days
   numberOfDays = datesDifferenceInDays;
   if (datesDifferenceInDays && result) {
-    result += datesDifferenceInDays == 1 ? " 1 day" : ` ${numberOfDays} days`;
+    result += " " + daysLocalization(numberOfDays);
   }
   return result ? "<br> or <br>" + result : result;
 }

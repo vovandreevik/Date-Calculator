@@ -3,3 +3,5 @@
 Локализация (день, дней, дня)
 
 Пусть каждый раз, когда changingJulianToGregorian выводится справка о календарях
+
+isGregorianTransitionPeriodLocalization поменять текст
