@@ -307,7 +307,7 @@ function calculatingTheDateDifference(dateArray, datesDifferenceInDays) {
   if (datesDifferenceInDays && result) {
     result += " " + daysLocalization(numberOfDays);
   }
-  return result ? "<br> or <br>" + result : result;
+  return result ? orLocalization() + result : result;
 }
 
 function calculatingTheDateDifferenceHelper(date1, date2) {

@@ -107,3 +107,7 @@ function yearsLocalizationRU(years) {
 function yearsLocalizationEN(years) {
     return years == 1 ? "1 year" : `${years} years`;
 }
+
+function orLocalization(){
+    return lang == "ru" ? "<br> или <br>" : "<br> or <br>";
+}
