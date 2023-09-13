@@ -1,32 +1,59 @@
-
-/* .DateCalculator{
-
+.Dates {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
 }
 
-.FirstDate{
 
+
+.FirstDate {}
+
+.SecondDate {}
+
+.Text {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.SecondDate{
+.Day {}
 
+.Month {}
+
+.Year {}
+
+.Button {
+    margin-top: 2%;
+    text-align: center;
 }
 
-.Day{
-
+#button {
+    width: 280px;
+    height: 51px;
+    flex-shrink: 0;
+    border-radius: 55px;
+    background: linear-gradient(90deg, rgba(222, 125, 254, 0.90) 7.65%, rgba(122, 43, 148, 0.68) 104.38%);
+    color: #FFF;
+    text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.25);
+    font-family: Montserrat;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: none;
 }
 
-.Month{
-
+.Result {
+    margin-left: 5%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
 }
 
-.Year{
-
-}
-
-.Text{
-
-}
-
-.Button{
-
-} */
+#button {}
