@@ -5,7 +5,7 @@ const langArray = {
     },
     "name": {
         "ru": "Калькулятор дней между датами",
-        "en": "Calculator of days between dates,
+        "en": "Calculator of days between dates",
     },
     "date1header": {
         "ru": "Введите первую дату",
