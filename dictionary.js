@@ -4,8 +4,8 @@ const langArray = {
         "en": "Amazing Date Calculator",
     },
     "name": {
-        "ru": "Введите первую дату",
-        "en": "Enter first date",
+        "ru": "Калькулятор дней между датами",
+        "en": "Calculator of days between dates,
     },
     "date1header": {
         "ru": "Введите первую дату",
