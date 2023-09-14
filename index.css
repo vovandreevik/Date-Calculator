@@ -1,3 +1,5 @@
+
+
 .Dates {
     display: flex;
     justify-content: space-between;
@@ -14,11 +16,9 @@
 
 .Text {
     color: #000;
-
     font-family: Montserrat;
     font-size: 30px;
     font-weight: 500;
-
 }
 
 .Day {}
@@ -33,16 +33,14 @@
 }
 
 #button {
-    width: 300px;
-    height: 60px;
-    flex-shrink: 0;
+    padding: 10px 50px;
     border-radius: 55px;
     background: linear-gradient(90deg, rgba(222, 125, 254, 0.90) 7.65%, rgba(122, 43, 148, 0.68) 104.38%);
     color: #FFF;
     text-shadow: 5px 5px 6px rgba(0, 0, 0, 0.25);
     font-family: Montserrat;
-    font-size: 42px;
-    font-weight: 400;
+    font-size: 30px;
+    font-weight: 600;
     border: none;
 }
 
