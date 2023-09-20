@@ -17,6 +17,7 @@
     font-family: Montserrat;
     font-size: 30px;
     font-weight: 500;
+
 }
 
 .Label {
@@ -29,7 +30,7 @@
     text-align: right;
 }
 
-input.Text, select.Text {
+.Field {
     width: 180px;
     height: 40px;
     border-radius: 5px;
@@ -70,10 +71,15 @@ input.Text, select.Text {
     .Dates {
         display: inline;
         margin: 25px 50px 75px;
-
     }
 
-    .Day, .Month, .Year {
-        margin: 30px, 30px, 30px, 30px;
+    .FirstDate {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .SecondDate {
+        margin-left: 15%;
+        margin-right: 15%;
     }
 }
