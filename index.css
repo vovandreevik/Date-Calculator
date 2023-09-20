@@ -74,12 +74,12 @@
     }
 
     .FirstDate {
-        margin-left: 15%;
-        margin-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 
     .SecondDate {
-        margin-left: 15%;
-        margin-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
