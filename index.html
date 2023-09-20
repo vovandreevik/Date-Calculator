@@ -27,11 +27,11 @@
             <div class="FirstDate">
                 <h1 id="date1header" class="Text">Enter first date</h1>
                 <div class="Day">
-                    <label for="day1" class="Text" id="day1Label">Day</label>
+                    <label for="day1" class="Text Label" id="day1Label">Day</label>
                     <input class="Text" name="day" type="number" id="day1" max="31" min="1" value="1">
                 </div>
                 <div class="Month">
-                    <label for="month1" class="Text" id="month1Label">Month</label>
+                    <label for="month1" class="Text Label" id="month1Label">Month</label>
                     <select name="month" id="month1" class="Text">
                         <option value="January" id="January1">January</option>
                         <option value="February" id="February1">February</option>
@@ -48,7 +48,7 @@
                     </select>
                 </div>
                 <div class="Year">
-                    <label for="year1" class="Text" id="year1Label">Year</label>
+                    <label for="year1" class="Text Label" id="year1Label">Year</label>
                     <input type="number" class="Text" name="year" id="year1" value="45" min="1">
                 </div>
                 <div class="Era">
@@ -64,11 +64,11 @@
             <div class="SecondDate">
                 <h1 id="date2header" class="Text">Enter second date</h1>
                 <div class="Day">
-                    <label for="day2" class="Text" id="day2Label">Day</label>
+                    <label for="day2" class="Text Label" id="day2Label">Day</label>
                     <input name="day" class="Text" type="number" id="day2" max="31" min="1">
                 </div>
                 <div class="Month">
-                    <label for="month2" class="Text" id="month2Label">Month</label>
+                    <label for="month2" class="Text Label" id="month2Label">Month</label>
                     <select name="month" id="month2" class="Text">
                         <option value="January" id="January2">January</option>
                         <option value="February" id="February2">February</option>
@@ -85,7 +85,7 @@
                     </select>
                 </div>
                 <div class="Year">
-                    <label for="year2" class="Text" id="year2Label">Year</label>
+                    <label for="year2" class="Text Label" id="year2Label">Year</label>
                     <input type="number" class="Text" name="year" id="year2" min="1">
                 </div>
                 <div class="Era">
@@ -96,8 +96,8 @@
                 </div>
             </div>
         </div>
-        <div class="Button">
-            <button id="button" onclick="dateCalculator()">Calculate</button>
+        <div class="ClickButton">
+            <button id="button" class="Button" onclick="dateCalculator()">Calculate</button>
         </div>
         <div class="Result">
             <p id="result"></p>

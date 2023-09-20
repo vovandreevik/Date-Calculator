@@ -19,18 +19,31 @@
     font-weight: 500;
 }
 
-.Day {}
+.Label {
+    float: left;
+}
 
-.Month {}
+.Day, .Month, .Year {
+    margin-top: 4px;
+    clear: both;
+    text-align: right;
+}
 
-.Year {}
+input.Text, select.Text {
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+}
 
-.Button {
-    margin-top: 2%;
+
+.ClickButton {
     text-align: center;
 }
 
-#button {
+.Button {
+    margin-top: 2%;
     padding: 10px 50px;
     border-radius: 55px;
     background: linear-gradient(90deg, rgba(222, 125, 254, 0.90) 7.65%, rgba(122, 43, 148, 0.68) 104.38%);
@@ -56,7 +69,11 @@
 @media only screen and (max-width: 768px) {
     .Dates {
         display: inline;
-        padding: 0 10%;
+        margin: 25px 50px 75px;
 
+    }
+
+    .Day, .Month, .Year {
+        margin: 30px, 30px, 30px, 30px;
     }
 }
