@@ -40,10 +40,6 @@ function checkingTheValidityOfDatesLocalization(str) {
             return lang == "ru" ? "Второй день введён неверно!#" : "The second year is incorrect!#";
         case "tooBigYear":
             return lang == "ru" ? "Введен слишком большой год!#" : "Enter a smaller year!#";
-        case "era1":
-            return lang == "ru" ? "Выберите первую эру!#" : "Choose the first era!#";
-        case "era2":
-            return lang == "ru" ? "Выберите вторую эру!#" : "Choose the second era!#";
     };
 }
 

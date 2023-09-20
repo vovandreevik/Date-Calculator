@@ -1,5 +1,3 @@
-
-
 .Dates {
     display: flex;
     justify-content: space-between;
@@ -52,4 +50,13 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .Dates {
+        display: inline;
+        padding: 0 10%;
+
+    }
 }

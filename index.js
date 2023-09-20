@@ -3,6 +3,14 @@ document.getElementById("day2").value = tempDate2.getDate();
 document.getElementById("month2").selectedIndex = tempDate2.getMonth();
 document.getElementById("year2").value = tempDate2.getFullYear();
 
+document.getElementById("day2").value = 15;
+document.getElementById("month2").selectedIndex = 9;
+document.getElementById("year2").value = 1582;
+
+document.getElementById("day1").value = 4;
+document.getElementById("month1").selectedIndex = 9;
+document.getElementById("year1").value = 1582;
+
 const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
 const LAST_BC_DATE = [0, 1, 11, 31];
 const FIRST_AD_DATE = [1, 1, 0, 1];
@@ -39,6 +47,7 @@ function dateCalculator() {
     const datesDifference = calculatingTheDateDifference(dateArray, parseInt(datesDifferenceInDays.split(" ")[0]));
     document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
   }
+  console.log(changingJulianToGregorian(date1, date2))
 }
 
 function checkEra(era) {
@@ -47,7 +56,7 @@ function checkEra(era) {
       return i;
     }
   }
-  return -1;
+  return 0;
 }
 
 function leapYearCheck(date) {
@@ -104,20 +113,11 @@ function checkingTheValidityOfDates(date1, date2) {
     result = false;
   }
 
-  if (date1[0] == -1) {
-    errorStr += checkingTheValidityOfDatesLocalization("era1");
-    result = false;
-  }
-
-  if (date2[0] == -1) {
-    errorStr += checkingTheValidityOfDatesLocalization("era2");
-    result = false;
-  }
-
   function isGregorianTransitionPeriod(date) {
     return date[0] === 1 && date[1] === 1582 && date[2] === 9 && date[3] > 4 && date[3] < 15;
   }
 
+  document.getElementById("errorNote").textContent = "";
   if (result && (isGregorianTransitionPeriod(date1) || isGregorianTransitionPeriod(date2))) {
     document.getElementById("errorNote").textContent = isGregorianTransitionPeriodLocalization();
     result = false;
@@ -245,11 +245,22 @@ function calculateExtraLeapDays(tempDate1, tempDate2, extraDays) {
   return result;
 }
 
+
+//!!!
 function changingJulianToGregorian(date1, date2) {
-  if ((date1 == gettingDatesInChronologicalOrder(date1, FIRST_GREGORIAN_DATE)[0]) &&
-    (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
-    return 10;
+  function notEqualDates(date1, date2) {
+    if (date1[0] == date2[0] && date1[1] == date2[1] &&
+      date1[2] == date2[2] && date1[3] == date2[3]){
+        return 0;
+    }
+    return 1;
   }
+
+  if ((date1 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date1)[0]) &&
+    (date2 == gettingDatesInChronologicalOrder(date2, FIRST_GREGORIAN_DATE)[1])){
+      return 10;
+    }
+  
   return 0;
 }
 
