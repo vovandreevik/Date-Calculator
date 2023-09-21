@@ -15,6 +15,9 @@ const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
 const LAST_BC_DATE = [0, 1, 11, 31];
 const FIRST_AD_DATE = [1, 1, 0, 1];
 
+const button = document.getElementById("button");
+button.addEventListener("click", dateCalculator);
+
 document.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -42,12 +45,22 @@ function dateCalculator() {
 
   if (checkingTheValidityOfDates(date1, date2)) {
     const dateArray = gettingDatesInChronologicalOrder(date1, date2);
+
     // const event = whatEventHappend(dateArray);
     const datesDifferenceInDays = calculatingTheDatesDifferenceInDays(dateArray);
     const datesDifference = calculatingTheDateDifference(dateArray, parseInt(datesDifferenceInDays.split(" ")[0]));
-    document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
+    setTimeout(function () {
+      document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
+    }, 50);
   }
-  console.log(changingJulianToGregorian(date1, date2))
+  if (screen.width <= 699) {
+    scroollToTheButton();
+  }
+}
+
+function scroollToTheButton(){
+  let scroll_to_bottom = document.getElementById('result');
+  scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
 }
 
 function checkEra(era) {
