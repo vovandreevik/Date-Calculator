@@ -53,13 +53,14 @@ function dateCalculator() {
       document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
     }, 50);
   }
+  scrollToTheButton();
   if (screen.width <= 699) {
-    scroollToTheButton();
+    scrollToTheButton();
   }
 }
 
-function scroollToTheButton(){
-  let scroll_to_bottom = document.getElementById('result');
+function scrollToTheButton(){
+  let scroll_to_bottom = document.getElementsByClassName('Result');
   scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
 }
 
