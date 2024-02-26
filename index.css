@@ -85,18 +85,22 @@ input[type="number"].Field, select {
 
 
 @media only screen and (max-width: 950px) {
+
+    input[type="number"].Field, select {
+        padding: 0 2px;
+        margin-left: 5px;
+        width: 180px;
+        height: 40px;
+        background-color: #FFF;
+    }
+
     .Dates {
         display: inline;
     }
 
-    .FirstDate {
-        padding-left: 8%;
-        padding-right: 8%
-    }
-
-    .SecondDate {
-        padding-left: 8%;
-        padding-right: 8%;
+    .FirstDate, .SecondDate {
+        padding-left: 2%;
+        padding-right: 2%
     }
 
     .Button:hover {
