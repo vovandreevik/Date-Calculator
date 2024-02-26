@@ -12,18 +12,19 @@
 
 <body>
     <div class="DateCalculator">
-        <div class="Header">
+        <section class="NameAndLanguage">
             <div class="LanguageSelect">
                 <select id="LanguageSelect" class="Text">
                     <option value="en">EN</option>
                     <option value="ru">RU</option>
                 </select>
             </div>
-        </div>
-        <div class="Name">
-            <h1 id="name" class="Result">Calculator of days between dates</h1>
-        </div>
-        <div class="Dates">
+            <div class="Name">
+                <h1 id="name" class="Name">Calculator of days between dates</h1>
+            </div>
+        </section>
+
+        <main class="Dates">
             <div class="FirstDate">
                 <h1 id="date1header" class="Text">Enter first date</h1>
                 <div class="Day">
@@ -95,7 +96,7 @@
                     <input type="radio" name="era2" id="AD2" checked>
                 </div>
             </div>
-        </div>
+        </main>
         <div class="ClickButton">
             <button id="button" class="Button">Calculate</button>
         </div>

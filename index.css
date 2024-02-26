@@ -4,28 +4,69 @@
     padding: 0 10%;
 }
 
+.Name {
+    text-align: center;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    flex-grow: 1;
+}
+
 input[type="number"].Field, select {
     box-sizing: border-box;
     appearance: none;
     font-size: 30px;
     padding: 0 5px;
-    border-radius: 5px;
-    border: 2px solid #000;
+    border-radius: 7px;
+    border: 3px solid #000;
     margin-left: 40px;
-    width: 200px;
+    width: 210px;
     height: 40px;
     background-color: #FFF;
 }
 
 #LanguageSelect {
-    border-radius: 5px;
-    border: 2px solid #000;
-    width: auto;
+    text-align: left;
+    width: 74px;
+    background-image: url('arrow-lang.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
-.Name {
-    text-align: center;
+@media only screen and (min-width: 1000px) {
+    section.NameAndLanguage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .Name {
+        margin-right: 50px;
+    }
+
+    select {
+        background-image: url('arrow-month.svg');
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+
+
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 40px;
+        background-image: url('arrows.svg');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 5px;
+    }
 }
+
 
 .Text {
     color: #000;
@@ -82,25 +123,19 @@ input[type="number"].Field, select {
     line-height: normal;
 }
 
+@media only screen and (max-width: 1000px) {
 
 
-@media only screen and (max-width: 950px) {
-
-    input[type="number"].Field, select {
-        padding: 0 2px;
-        margin-left: 5px;
-        width: 180px;
-        height: 40px;
-        background-color: #FFF;
-    }
 
     .Dates {
         display: inline;
+
     }
 
     .FirstDate, .SecondDate {
-        padding-left: 2%;
-        padding-right: 2%
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
     }
 
     .Button:hover {
