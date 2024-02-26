@@ -3,13 +3,9 @@ document.getElementById("day2").value = tempDate2.getDate();
 document.getElementById("month2").selectedIndex = tempDate2.getMonth();
 document.getElementById("year2").value = tempDate2.getFullYear();
 
-document.getElementById("day2").value = 15;
-document.getElementById("month2").selectedIndex = 9;
-document.getElementById("year2").value = 1582;
-
-document.getElementById("day1").value = 4;
-document.getElementById("month1").selectedIndex = 9;
-document.getElementById("year1").value = 1582;
+document.getElementById("day1").value = 2;
+document.getElementById("month1").selectedIndex = 8;
+document.getElementById("year1").value = 2019;
 
 const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
 const LAST_BC_DATE = [0, 1, 11, 31];
@@ -257,16 +253,7 @@ function calculateExtraLeapDays(tempDate1, tempDate2, extraDays) {
   return result;
 }
 
-//!!!
 function changingJulianToGregorian(date1, date2) {
-
-  function notEqualDates(date1, date2) {
-    if (date1[0] == date2[0] && date1[1] == date2[1] &&
-      date1[2] == date2[2] && date1[3] == date2[3]) {
-      return 0;
-    }
-    return 1;
-  }
 
   if ((date1 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date1)[0]) &&
     (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
