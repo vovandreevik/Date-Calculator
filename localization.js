@@ -45,8 +45,8 @@ function checkingTheValidityOfDatesLocalization(str) {
 
 // change text!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function isGregorianTransitionPeriodLocalization() {
-    let ruErrorMessage = "Нет таких дат!";
-    let enErrorMessage = "No data!";
+    const ruErrorMessage = "Нет таких дат!";
+    const enErrorMessage = "There are no such dates!";
     return lang == "ru" ? ruErrorMessage : enErrorMessage;
 }
 
@@ -104,6 +104,6 @@ function yearsLocalizationEN(years) {
     return years == 1 ? "1 year" : `${years} years`;
 }
 
-function orLocalization(){
+function orLocalization() {
     return lang == "ru" ? "<br> или <br>" : "<br> or <br>";
 }

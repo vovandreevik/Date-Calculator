@@ -3,13 +3,13 @@ document.getElementById("day2").value = tempDate2.getDate();
 document.getElementById("month2").selectedIndex = tempDate2.getMonth();
 document.getElementById("year2").value = tempDate2.getFullYear();
 
-// document.getElementById("day2").value = 15;
-// document.getElementById("month2").selectedIndex = 9;
-// document.getElementById("year2").value = 1582;
+document.getElementById("day2").value = 15;
+document.getElementById("month2").selectedIndex = 9;
+document.getElementById("year2").value = 1582;
 
-// document.getElementById("day1").value = 4;
-// document.getElementById("month1").selectedIndex = 9;
-// document.getElementById("year1").value = 1582;
+document.getElementById("day1").value = 4;
+document.getElementById("month1").selectedIndex = 9;
+document.getElementById("year1").value = 1582;
 
 const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
 const LAST_BC_DATE = [0, 1, 11, 31];
@@ -49,19 +49,11 @@ function dateCalculator() {
     // const event = whatEventHappend(dateArray);
     const datesDifferenceInDays = calculatingTheDatesDifferenceInDays(dateArray);
     const datesDifference = calculatingTheDateDifference(dateArray, parseInt(datesDifferenceInDays.split(" ")[0]));
-    setTimeout(function () {
-      document.getElementById("result").innerHTML = datesDifferenceInDays + datesDifference;
-    }, 50);
-  }
-  scrollToTheButton();
-  if (screen.width <= 699) {
-    scrollToTheButton();
-  }
-}
 
-function scrollToTheButton(){
-  let scroll_to_bottom = document.getElementsByClassName('Result');
-  scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+    const resultElement = document.getElementById("result");
+    resultElement.innerHTML = datesDifferenceInDays + datesDifference;
+    resultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function checkEra(era) {
@@ -75,32 +67,38 @@ function checkEra(era) {
 
 function leapYearCheck(date) {
   // date = [era, year, month, day];
+
   // Proleptic Julian calendar
   if (date[0] == 0 && (date[1] - 1) % 4 == 0) {
     return true;
   }
+
   // Julian calendar
   if (date[0] == 1 && date[1] <= FIRST_GREGORIAN_DATE[1]) {
     if (date[1] % 4 == 0) {
       return true;
     }
   }
+
   // Gregorian calendar
   if (date[0] == 1 && date[1] >= FIRST_GREGORIAN_DATE[1]) {
     if ((date[1] % 4 == 0 && date[1] % 100 != 0) || date[1] % 400 == 0) {
       return true;
     }
   }
+
   return false;
 }
 
 function checkingTheValidityOfDates(date1, date2) {
   // date = [era, year, month, day];
+
   let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let errorStr = "";
   let result = true;
 
   months[1] = leapYearCheck(date1) ? 29 : 28;
+
   if (date1[3] % 1 != 0 || date1[3] < 1 || date1[3] > months[date1[2]]) {
     errorStr += checkingTheValidityOfDatesLocalization("day1");
     result = false;
@@ -122,7 +120,7 @@ function checkingTheValidityOfDates(date1, date2) {
     result = false;
   }
 
-  if ((date1[1] + date2[1]) > Number.MAX_SAFE_INTEGER || (date2[2] - date1[1]) > Number.MAX_SAFE_INTEGER) {
+  if ((date1[1] + date2[1]) > Number.MAX_SAFE_INTEGER || Math.abs(date2[2] - date1[1]) > Number.MAX_SAFE_INTEGER) {
     errorStr += checkingTheValidityOfDatesLocalization("tooBigYear");
     result = false;
   }
@@ -259,22 +257,23 @@ function calculateExtraLeapDays(tempDate1, tempDate2, extraDays) {
   return result;
 }
 
-
 //!!!
 function changingJulianToGregorian(date1, date2) {
+
   function notEqualDates(date1, date2) {
     if (date1[0] == date2[0] && date1[1] == date2[1] &&
-      date1[2] == date2[2] && date1[3] == date2[3]){
-        return 0;
+      date1[2] == date2[2] && date1[3] == date2[3]) {
+      return 0;
     }
     return 1;
   }
 
   if ((date1 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date1)[0]) &&
-    (date2 == gettingDatesInChronologicalOrder(date2, FIRST_GREGORIAN_DATE)[1])){
-      return 10;
-    }
-  
+    (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
+    console.log("!!!!!")
+    return 10;
+  }
+
   return 0;
 }
 
