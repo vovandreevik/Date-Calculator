@@ -4,9 +4,23 @@
     padding: 0 10%;
 }
 
+input[type="number"].Field, select {
+    box-sizing: border-box;
+    appearance: none;
+    font-size: 30px;
+    padding: 0 5px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    margin-left: 40px;
+    width: 200px;
+    height: 40px;
+    background-color: #FFF;
+}
+
 #LanguageSelect {
     border-radius: 5px;
     border: 2px solid #000;
+    width: auto;
 }
 
 .Name {
@@ -18,7 +32,6 @@
     font-family: Montserrat;
     font-size: 30px;
     font-weight: 500;
-
 }
 
 .Label {
@@ -30,15 +43,6 @@
     clear: both;
     text-align: right;
 }
-
-.Field {
-    width: 200px;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid #000;
-
-}
-
 
 .ClickButton {
     text-align: center;
@@ -55,9 +59,11 @@
     font-size: 30px;
     font-weight: 600;
     border: none;
+    transition: transform 0.3s ease;
 }
 
 .Button:hover {
+    transform: scale(1.03);
     background: linear-gradient(90deg, rgba(234, 172, 255, 0.90) 42.79%, rgba(166, 59, 201, 0.68) 116.07%);
 }
 
@@ -76,10 +82,11 @@
     line-height: normal;
 }
 
-@media only screen and (max-width: 768px) {
+
+
+@media only screen and (max-width: 950px) {
     .Dates {
         display: inline;
-        margin: 25px 50px 75px;
     }
 
     .FirstDate {
@@ -93,6 +100,7 @@
     }
 
     .Button:hover {
+        transform: scale(1);
         background: linear-gradient(90deg, rgba(222, 125, 254, 0.90) 7.65%, rgba(122, 43, 148, 0.68) 104.38%);
     }
 
