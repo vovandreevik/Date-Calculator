@@ -36,38 +36,6 @@ input[type="number"].Field, select {
     background-position: right center;
 }
 
-@media only screen and (min-width: 1000px) {
-    section.NameAndLanguage {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .Name {
-        margin-right: 50px;
-    }
-
-    select {
-        background-image: url('arrow-month.svg');
-        background-repeat: no-repeat;
-        background-position: right center;
-    }
-
-
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        width: 16px;
-        height: 40px;
-        background-image: url('arrows.svg');
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        margin-right: 5px;
-    }
-}
-
-
 .Text {
     color: #000;
     font-family: Montserrat;
@@ -123,19 +91,46 @@ input[type="number"].Field, select {
     line-height: normal;
 }
 
+@media only screen and (min-width: 1000px) {
+    section.NameAndLanguage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .Name {
+        margin-right: 50px;
+    }
+
+    select {
+        background-image: url('arrow-month.svg');
+        background-repeat: no-repeat;
+        background-position: right center;
+    }
+
+
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 40px;
+        background-image: url('arrows.svg');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 5px;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
-
-
-
     .Dates {
         display: inline;
-
     }
 
     .FirstDate, .SecondDate {
         margin-left: auto;
         margin-right: auto;
-        width: 70%;
+        width: 65%;
     }
 
     .Button:hover {
@@ -147,5 +142,24 @@ input[type="number"].Field, select {
         color: #949292;
         background: linear-gradient(90deg, rgba(113, 36, 138, 0.9) -12.18%, rgba(81, 0, 105, 0.68) 61.11%);
     }
+}
+
+@media only screen and (max-width: 555px) {
+
+
+    .FirstDate, .SecondDate {
+        margin-left: auto;
+        margin-right: auto;
+        width: 95%;
+    }
+
+
+    input[type="number"].Field, select {
+        width: 180px;
+        height: 40px;
+        margin-left: 5px;
+        padding: 0 2px;
+    }
+
 
 }
