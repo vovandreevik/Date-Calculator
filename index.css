@@ -24,6 +24,14 @@ header {
     float: right;
 }
 
+.Era label {
+    margin-right: 10px;
+}
+
+.Era input[type="radio"] {
+    margin-right: 50px;
+}
+
 .Name {
     text-align: center;
     color: #000;
@@ -177,7 +185,6 @@ input[type="radio"]:checked {
     .LanguageSelect {
         text-align: right;
         margin-right: 40px;
-
     }
 
     .Button:hover {
@@ -194,6 +201,12 @@ input[type="radio"]:checked {
 @media only screen and (max-width: 555px) {
     .Logo {
         margin-left: 0px;
+        margin-top: 15px;
+        height: 50px;
+    }
+
+    .Rhombus {
+        opacity: 0.5;
     }
 
     .FirstDate, .SecondDate {
@@ -202,6 +215,13 @@ input[type="radio"]:checked {
         width: 90%;
     }
 
+    .Era label {
+        margin-right: 4px;
+    }
+
+    .Era input[type="radio"] {
+        margin-right: 30px;
+    }
 
     input[type="number"].Field, select {
         width: 180px;
