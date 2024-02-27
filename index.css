@@ -4,6 +4,26 @@
     padding: 0 10%;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 75px;
+    background: linear-gradient(90deg, rgba(239, 193, 255, 0.9) 7.65%, rgb(80, 6, 104) 104.38%);
+    margin-bottom: 20px;
+}
+
+.Logo {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.Rhombus {
+    float: right;
+}
+
 .Name {
     text-align: center;
     color: #000;
@@ -34,6 +54,19 @@ input[type="number"].Field, select {
     background-image: url('arrow-lang.svg');
     background-repeat: no-repeat;
     background-position: right center;
+}
+
+input[type="radio"] {
+    padding: 7px;
+    border: 2px solid #DE7DFE;
+    border-radius: 50%;
+    appearance: none;
+    /* remove default styling */
+}
+
+input[type="radio"]:checked {
+    padding: 7px;
+    background-color: #DE7DFE;
 }
 
 .Text {
@@ -123,6 +156,14 @@ input[type="number"].Field, select {
 }
 
 @media only screen and (max-width: 1000px) {
+    .Logo {
+        position: absolute
+    }
+
+    #date1header, #date2header, .Era {
+        text-align: center;
+    }
+
     .Dates {
         display: inline;
     }
@@ -131,6 +172,12 @@ input[type="number"].Field, select {
         margin-left: auto;
         margin-right: auto;
         width: 65%;
+    }
+
+    .LanguageSelect {
+        text-align: right;
+        margin-right: 40px;
+
     }
 
     .Button:hover {
@@ -145,12 +192,14 @@ input[type="number"].Field, select {
 }
 
 @media only screen and (max-width: 555px) {
-
+    .Logo {
+        margin-left: 0px;
+    }
 
     .FirstDate, .SecondDate {
         margin-left: auto;
         margin-right: auto;
-        width: 95%;
+        width: 90%;
     }
 
 
@@ -160,6 +209,4 @@ input[type="number"].Field, select {
         margin-left: 5px;
         padding: 0 2px;
     }
-
-
 }

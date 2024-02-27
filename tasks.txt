@@ -1,0 +1,11 @@
+При неккоректном вводе, вывод окна ошибки и подсвечиванием красным поля ошибки.
+
+Пусть каждый раз, когда changingJulianToGregorian выводится справка о календарях
+
+isGregorianTransitionPeriodLocalization поменять текст
+
+NEED TO DEBUG LEAP YEARS BC
+
+logo
+
+header
