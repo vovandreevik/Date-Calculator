@@ -1,30 +1,30 @@
 # DayBday
 
-Этот проект представляет собой веб-приложение, которое позволяет вычислять количество дней между двумя датами. Пользователь может ввести две даты в соответствующие поля, выбрав день, месяц и год для каждой из них, а затем нажать кнопку "Рассчитать", чтобы получить результат. Приложение также предоставляет локализацию на английском и русском языках.
+This project is a web application that allows you to calculate the number of days between two dates. The user can enter two dates in the corresponding fields, selecting the day, month and year for each of them, and then click the "Calculate" button to get the result. The application also provides localization in English and Russian.
 
-## Функциональность
+## Functionality
 
-- Ввод двух дат с возможностью выбора дня, месяца, года и эры.
-- Расчет количества дней между выбранными датами.
-- Локализация на русский и английский языки.
+- Enter two dates with the ability to select a day, month, year and era.
+- Calculation of the number of days between selected dates.
+- Localization into Russian and English.
 
-## Технологии
+## Technologies
 
-- HTML, CSS, JavaScript для фронтенда.
-- Использование локализации для поддержки разных языков.
-- Использование проверок на корректность введенных данных.
-- Использование методов для вычисления разницы в днях между датами.
+- HTML, CSS, JavaScript for the frontend.
+- Using localization to support different languages.
+- The use of checks for the correctness of the entered data.
+- Using methods to calculate the difference in days between dates.
 
-## Использование
+## Usage
 
-1. Откройте сайт [DayBday](https://amazing-date-calculator.netlify.app/#ru) в вашем браузере.
-2. Введите первую и вторую даты в соответствующие поля.
-3. Нажмите кнопку "Рассчитать", чтобы увидеть результат.
+1. Open the website [DayBday](https://amazing-date-calculator.netlify.app/#en) in your browser.
+2. Enter the first and second dates in the appropriate fields.
+3. Click the "Calculate" button to see the result.
 
-## Локализация
+## Localization
 
-Приложение поддерживает два языка: английский и русский. Вы можете выбрать желаемый язык в выпадающем меню.
+The application supports two languages: English and Russian. You can select the desired language from the drop-down menu.
 
-## Важное примечание
+## Important note
 
-Для корректной работы приложения убедитесь, что введенные даты соответствуют действительным календарным значениям.
+For the application to work correctly, make sure that the entered dates correspond to valid calendar values.
