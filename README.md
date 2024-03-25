@@ -2,6 +2,9 @@
 
 This project is a web application that allows you to calculate the number of days between two dates. The user can enter two dates in the corresponding fields, selecting the day, month and year for each of them, and then click the "Calculate" button to get the result. The application also provides localization in English and Russian.
 
+_The project is under development_
+
+
 ## Functionality
 
 - Enter two dates with the ability to select a day, month, year and era.
