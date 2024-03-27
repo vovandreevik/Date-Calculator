@@ -3,6 +3,10 @@ const langArray = {
         "ru": "Калькулятор дней между датами",
         "en": "Amazing Date Calculator",
     },
+    "description": {
+        "ru": "Калькулятор дней между датами. Введите две даты с возможностью выбора дня, месяца, года и эры. Локализация на русский и английский языки.",
+        "en": "Calculator of days between dates. Enter two dates with the ability to select a day, month, year and era. Localization into Russian and English.",
+    },
     "name": {
         "ru": "Калькулятор дней между датами",
         "en": "Calculator of days between dates",
