@@ -1,11 +1,15 @@
 const tempDate2 = new Date(); //today
-document.getElementById("day2").value = tempDate2.getDate();
-document.getElementById("month2").selectedIndex = tempDate2.getMonth();
-document.getElementById("year2").value = tempDate2.getFullYear();
+// document.getElementById("day2").value = tempDate2.getDate();
+// document.getElementById("month2").selectedIndex = tempDate2.getMonth();
+// document.getElementById("year2").value = tempDate2.getFullYear();
 
-document.getElementById("day1").value = 2;
-document.getElementById("month1").selectedIndex = 8;
-document.getElementById("year1").value = 2019;
+document.getElementById("day2").value = 1;
+document.getElementById("month2").selectedIndex = 0;
+document.getElementById("year2").value = 1;
+
+document.getElementById("day1").value = 1;
+document.getElementById("month1").selectedIndex = 0;
+document.getElementById("year1").value = 1;
 
 const FIRST_GREGORIAN_DATE = [1, 1582, 9, 15];
 const LAST_BC_DATE = [0, 1, 11, 31];
@@ -216,8 +220,10 @@ function calculatingNumberOfDaysInLeapYearsHelperBC(tempDate1, tempDate2) {
   }
   if (date1[1] > date2[1]) {
     for (date2[1]++; date2[1] <= date1[1]; ++date2[1]) {
+      console.log(result, date2[1])
       if (leapYearCheck(date2)) {
         result++;
+
       }
     }
   }
@@ -257,7 +263,6 @@ function changingJulianToGregorian(date1, date2) {
 
   if ((date1 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date1)[0]) &&
     (date2 == gettingDatesInChronologicalOrder(FIRST_GREGORIAN_DATE, date2)[1])) {
-    console.log("!!!!!")
     return 10;
   }
 

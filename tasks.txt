@@ -6,6 +6,4 @@ isGregorianTransitionPeriodLocalization поменять текст
 
 NEED TO DEBUG LEAP YEARS BC
 
-logo
-
-header
+icon?
