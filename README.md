@@ -27,7 +27,3 @@ _The project is under development_
 ## Localization
 
 The application supports two languages: English and Russian. You can select the desired language from the drop-down menu.
-
-## Important note
-
-For the application to work correctly, make sure that the entered dates correspond to valid calendar values.
